@@ -14,16 +14,37 @@ const getWinner = (player, computer) => {
     if (player === computer) {
         return "It's a tie!";
     } else if((player === "rock" && computer === "scissors") || (player === "paper" && computer === "rock") || (player === "scissors" && computer === "paper")) {
+        playerCount = playerCount + 1; 
+        document.getElementById("player-score").innerHTML = `
+            ${playerCount}
+            `; 
         return "You win!"; 
+
     } else {
+        computerCount = computerCount + 1;
+        document.getElementById("computer-score").innerHTML = `
+           ${computerCount}`
         return "Computer wins!";
     }
 };
+
 // Event listeners for buttons
 document.getElementById("rock").addEventListener("click", () => playGame("rock"));
 document.getElementById("paper").addEventListener("click", () => playGame("paper"));
 document.getElementById("scissors").addEventListener("click", () => playGame("scissors"));
+//reset button
+document.getElementById("reset").addEventListener("click", () => {
+    playerCount = 0; 
+    computerCount = 0; 
+    document.getElementById("computer-score").innerHTML = `
+    ${computerCount}`
+    document.getElementById("player-score").innerHTML = `
+    ${playerCount}
+    `; 
+   });
 // Main game logic
+let playerCount = 0;
+let computerCount = 0; 
 const playGame = (playerChoice) => {
     const computerChoice = getComputerChoice(); // Get the computer's choice
     const result = getWinner(playerChoice, computerChoice); // Determine the winner
@@ -35,5 +56,4 @@ const playGame = (playerChoice) => {
     `;
     // TODO: Update the #result element with the player choice, computer choice, and result
 };
-
     // TODO: Update the #result element with the player choice, computer choice, and result
